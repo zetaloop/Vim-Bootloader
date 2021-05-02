@@ -1,4 +1,4 @@
-# Vim-Bootloader
+## Vim-Bootloader
 A simple pre-configuration prompt window displayed every time you start vim.
 
 <img src="https://cdn.jsdelivr.net/gh/ZetaSp/Vim-Bootloader@main/to.png">
@@ -41,3 +41,9 @@ else
 endif
 ```
  - Finished.
+### Usage
+ - Open vim
+ - N Disable UTF-8 when running some vim scripts in ASCII or else.
+ - N Disable annoying additional files when editing a simple file for only once.
+ - Y Enable ====MORE==== when running some huge scripts.
+ - A = NNY
