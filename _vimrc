@@ -95,3 +95,8 @@ if Vimbootanswer[2]==2
 else
 	set nomore
 endif
+
+" Errorclose
+if len(Vimbootanswer)!=3
+	exit
+endif
