@@ -47,8 +47,9 @@ endif
 ```
  - Finished.
 ### Usage
+(for example using 211 as DefaultAnswer)
  - Open vim
  - N Disable UTF-8 when running some vim scripts in ASCII or else.
- - N Disable annoying additional files when editing a simple file for only once.
+ - Y Enable annoying additional files when not editing a simple file for only once.
  - Y Enable ====MORE==== when running some huge scripts.
- - A = NNY
+ - A = YNN (Default choice)
