@@ -52,4 +52,4 @@ endif
  - N Disable UTF-8 when running some vim scripts in ASCII or else.
  - Y Enable annoying additional files when not editing a simple file for only once.
  - Y Enable ====MORE==== when running some huge scripts.
- - A = YNN (Default choice)
+ - A = YNN (Default Choice)
