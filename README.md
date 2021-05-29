@@ -1,7 +1,7 @@
 ## Vim-Bootloader
 A simple pre-configuration prompt window displayed every time you start vim.
 
-<img src="https://cdn.jsdelivr.net/gh/ZetaSp/Vim-Bootloader@main/to.pngg">
+<img src="https://cdn.jsdelivr.net/gh/ZetaSp/Vim-Bootloader@main/to.png">
 
 ### Installation
  - Copy vimboot.cmd next to vimrc, under $VIM.
