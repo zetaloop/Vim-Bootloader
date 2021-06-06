@@ -5,7 +5,7 @@ mode con cols=60 lines=24
 set DefaultAnswer=211
 :: 1=off, 2=on
 
-set DemoMode=2
+set DemoMode=1
 :: 1=off, 2=on
 :: Pause at the last choice; take a photo.
 
