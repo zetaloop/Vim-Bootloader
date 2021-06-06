@@ -8,7 +8,7 @@ A simple pre-configuration prompt window displayed every time you start vim.
  - Add the following pattern to your vimrc.
 ```
 " Vim User-Config Bootloader
-silent exec '!cmd /c '.$VIM.'\vimboot.cmd'
+silent exec '!'.$VIM.'\vimboot.cmd'
 let Vimbootanswer=v:shell_error
 
 " UTF-8
