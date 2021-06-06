@@ -13,7 +13,7 @@ set d2=%DefaultAnswer:~1,1%
 set d3=%DefaultAnswer:~2,1%
 echo [Auto answer in 1 sec]
 echo.
-echo Options (All Default[A] Restart[R]):
+echo Options (All Default[A/D] Reset[R]):
 if %d1%==1 (
 	set c1=n
 	echo UTF-8	--N
@@ -39,20 +39,23 @@ echo.
 
 :: choice Y:1 N:2
 
-choice /t 1 /d %c1% /c ynar /n /m "UTF-8 support ON?	[y/n]"
+choice /t 1 /d %c1% /c ynadr /n /m "UTF-8 support ON?	[y/n]"
 if %errorlevel%==1 set /a vimbootanswer=%vimbootanswer%+100
 if %errorlevel%==3 set vimbootanswer=%DefaultAnswer%&goto :end
-if %errorlevel%==4 goto :start
+if %errorlevel%==4 set vimbootanswer=%DefaultAnswer%&goto :end
+if %errorlevel%==5 goto :start
 
-choice /t 1 /d %c2% /c ynar /n /m "KEEP .un~ .vim~ .swp?	[y/n]"
+choice /t 1 /d %c2% /c ynadr /n /m "KEEP .un~ .vim~ .swp?	[y/n]"
 if %errorlevel%==1 set /a vimbootanswer=%vimbootanswer%+10
 if %errorlevel%==3 set vimbootanswer=%DefaultAnswer%&goto :end
-if %errorlevel%==4 goto :start
+if %errorlevel%==4 set vimbootanswer=%DefaultAnswer%&goto :end
+if %errorlevel%==5 goto :start
 
-choice /t 1 /d %c3% /c ynar /n /m "==== MORE ==== ?	[y/n]"
+choice /t 1 /d %c3% /c ynadr /n /m "==== MORE ==== ?	[y/n]"
 if %errorlevel%==1 set /a vimbootanswer=%vimbootanswer%+1
 if %errorlevel%==3 set vimbootanswer=%DefaultAnswer%&goto :end
-if %errorlevel%==4 goto :start
+if %errorlevel%==4 set vimbootanswer=%DefaultAnswer%&goto :end
+if %errorlevel%==5 goto :start
 
 mshta vbscript:CreateObject("Wscript.Shell")(window.close)
 ::That stupid mshta was just for a suitable delay.
