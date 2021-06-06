@@ -42,36 +42,18 @@ function MyDiff()
   endif
 endfunction
 
-" 设置缓存区文件修改不保存时切换，临时保留在内存（交换文件？）
-set hidden
 
-" 开启绝对行号
-set number
 
-" 高亮当前行列
-set cursorline
-set cursorcolumn
-
-" Vim-Plug
-call plug#begin('~/.vim/plugged')
-Plug 'cormacrelf/vim-colors-github'
-Plug 'itchyny/lightline.vim'
-call plug#end()
-
-" 配色
-colorscheme github
-let g:lightline = { 'colorscheme': 'github' }
-set background=light
 
 " Vim User-Config Bootloader
-silent exec '!cmd /c '.$VIM.'\vimboot.cmd'
+silent exec '!'.$VIM.'\vimboot.cmd'
 let Vimbootanswer=v:shell_error
 
+set fileencodings=ucs-bom,utf-8,cp936,gb18030,big5,euc-jp,euc-kr,latin1
 " UTF-8
 if Vimbootanswer[0]==2
 	set encoding=utf-8
-	set termencoding=utf-8
-	set fileencodings=ucs-bom,utf-8,cp936,gb18030,big5,euc-jp,euc-kr,latin1
+	set termencoding=cp936
 	language messages zh_CN.utf-8    "<--- For a full Zh-cn version. Otherwise plz keep commented.
 	" reload the menu can solve the messy codes.
 	source $VIMRUNTIME/delmenu.vim
@@ -100,3 +82,35 @@ endif
 if len(Vimbootanswer)!=3
 	exit
 endif
+
+
+
+
+" 设置缓存区文件修改不保存时切换，临时保留在内存（交换文件？）
+set hidden
+
+" 开启绝对行号
+set number
+
+" 高亮当前行列
+set cursorline
+set cursorcolumn
+
+" Vim-Plug
+call plug#begin('~/.vim/plugged')
+Plug 'cormacrelf/vim-colors-github'
+Plug 'itchyny/lightline.vim'
+call plug#end()
+
+" LightLine 状态栏常开
+set laststatus=2
+
+" 配色
+colorscheme github
+let g:lightline = { 'colorscheme': 'github' }
+set background=light
+
+" 取消自动修末尾换行
+set nofixeol
+
+
