@@ -1,6 +1,11 @@
+:: VIM BOOTLOADER by Zetaspace
+:: [GitHub.com/ZetaSp] [ideaploter@outlook.com]
+:: 1.5.0
+:: 2021 Jan 10
+
 :start
 @echo off
-mode con cols=60 lines=24
+if test"%1"==test"" title New Vim&gvim& exit
 
 set DefaultAnswer=211
 :: 1=off, 2=on
@@ -9,11 +14,14 @@ set DemoMode=1
 :: 1=off, 2=on
 :: Pause at the last choice; take a photo.
 
+mode con cols=60 lines=24
 title Vim Bootloader
 set vimbootanswer=111
 set d1=%DefaultAnswer:~0,1%
 set d2=%DefaultAnswer:~1,1%
 set d3=%DefaultAnswer:~2,1%
+echo TASK: %1
+echo.
 echo [Auto answer for 1 sec]
 echo Default[A/D] Reset[R] Close[X]:
 echo.
@@ -68,8 +76,11 @@ if %errorlevel%==5 goto :start
 if %errorlevel%==6 goto :EOF
 
 mshta vbscript:CreateObject("Wscript.Shell")(window.close)
-::That stupid mshta was just for a suitable delay.
+:: That stupid mshta was just for a suitable closing delay.
 :end
+start /min cmd /c timeout /t 1 /nobreak^>nul^&mshta vbscript:createobject("wscript.shell").appactivate("%1")(window.close)
+:: Activate the vim window by luck(1 sec delay, works well in most cases).
+:: Solve the problen of hiding windows.
 exit %vimbootanswer%
 goto :EOF
 
@@ -77,3 +88,47 @@ goto :EOF
 start /min powershell Add-Type -AssemblyName System.Windows.Forms; [System.Windows.Forms.SendKeys]::SendWait('{PRTSC}');
 :: Call ShareX
 goto :EOF
+
+
+
+::=========================
+:: Add these to your vimrc
+::=========================
+" Vim User-Config Bootloader
+let Vimboot_Title='VIM_'.rand().rand()			" The windows title must start with a letter, or else it cannot be activated.
+execute('set titlestring='.Vimboot_Title)
+silent exec '!'.$VIM.'\vimboot.cmd '.Vimboot_Title
+let Vimboot_Answer=v:shell_error
+call timer_start(0,{-> execute('set titlestring=')})	" Unactivated vim window caused some delay. So it just works.
+" UTF-8
+if Vimboot_Answer[0]==2
+	set encoding=utf-8
+	set termencoding=cp936
+	" language messages zh_CN.utf-8    "<--- For a full Zh-cn version. Otherwise plz keep commented.
+	" reload the menu can solve the messy codes.
+	source $VIMRUNTIME/delmenu.vim
+	source $VIMRUNTIME/menu.vim
+endif
+
+" ~Files
+if Vimboot_Answer[1]==2
+	set undofile
+	set backup
+	set swapfile
+else
+	set noundofile
+	set nobackup
+	set noswapfile
+endif
+
+" ==MORE==
+if Vimboot_Answer[2]==2
+	set more
+else
+	set nomore
+endif
+
+" Errorclose
+if len(Vimboot_Answer)!=3
+	exit
+endif
