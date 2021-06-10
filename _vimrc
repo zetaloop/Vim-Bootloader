@@ -44,14 +44,14 @@ endfunction
 
 
 
-
 " Vim User-Config Bootloader
-silent exec '!'.$VIM.'\vimboot.cmd'
-let Vimbootanswer=v:shell_error
-
-set fileencodings=ucs-bom,utf-8,cp936,gb18030,big5,euc-jp,euc-kr,latin1
+let Vimboot_Title='VIM_'.rand().rand()			" The windows title must start with a letter, otherwise it cannot be activated.
+execute('set titlestring='.Vimboot_Title)
+silent exec '!'.$VIM.'\vimboot.cmd '.Vimboot_Title
+let Vimboot_Answer=v:shell_error
+call timer_start(0,{-> execute('set titlestring=')})	" Unactivated vim window caused some delay. So it just works.
 " UTF-8
-if Vimbootanswer[0]==2
+if Vimboot_Answer[0]==2
 	set encoding=utf-8
 	set termencoding=cp936
 	language messages zh_CN.utf-8    "<--- For a full Zh-cn version. Otherwise plz keep commented.
@@ -61,7 +61,7 @@ if Vimbootanswer[0]==2
 endif
 
 " ~Files
-if Vimbootanswer[1]==2
+if Vimboot_Answer[1]==2
 	set undofile
 	set backup
 	set swapfile
@@ -72,19 +72,21 @@ else
 endif
 
 " ==MORE==
-if Vimbootanswer[2]==2
+if Vimboot_Answer[2]==2
 	set more
 else
 	set nomore
 endif
 
 " Errorclose
-if len(Vimbootanswer)!=3
+if len(Vimboot_Answer)!=3
 	exit
 endif
 
 
 
+" File Encodings
+set fileencodings=ucs-bom,utf-8,cp936,gb18030,big5,euc-jp,euc-kr,latin1
 
 " 设置缓存区文件修改不保存时切换，临时保留在内存（交换文件？）
 set hidden
